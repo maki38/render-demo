@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Real Estates</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  <body>
+    <div id="app" class="container">
+      Get latest offers here:
+      <button class="btn btn-outline-primary" @click="getData()">Show</button>
+      <p v-if="editPrice != undefiend">
+        <input class="mt-2 form-control w-25" type="text" v-model="editPrice" />
+        <button class="btn btn-outline-success" @click="patchPrice()">
+          <i class="fa-solid fa-check"></i>
+        </button>
+      </p>
+      <table class="table">
+        <thead>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Address</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <tr v-for="i of immos">
+            <td><img :src="`${i.image}`" width="120" alt="Bild" /></td>
+            <td class="align-middle">{{i.title}}</td>
+            <td class="align-middle">
+              {{i.postCode}}<br />
+              {{i.city}}<br />
+              {{i.country}}
+            </td>
+            <td class="align-middle">
+              {{i.price.toLocaleString('de-AT', {style: 'currency', currency: 'EUR'})}}
+            </td>
+            <td>
+              <button class="btn btn-outline-danger mr-2" @click="deleteOne(i)">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+              <button class="btn btn-outline-primary" @click="editOne(i)">
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.45/vue.global.min.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
